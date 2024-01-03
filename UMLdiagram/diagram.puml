@@ -1,0 +1,370 @@
+@startuml BibliotecaOB_Digram
+
+!define REPO_PATH ../src/main/java/br/com/marianadmoreira/bibliotecaob
+
+package "Adapter" {
+  class OpenLibraryAdapter {
+    + adaptOpenLibraryDataToBookModel(openLibraryData: OpenLibraryData): Book
+  }
+}
+
+package "API" {
+  class OpenLibraryApiResponse {
+    - isbnData: Map<String, OpenLibraryData>
+    + getIsbnData(): Map<String, OpenLibraryData>
+    + setIsbnData(isbnData: Map<String, OpenLibraryData>): void
+    + getOpenLibraryDataByIsbn(isbn: String): OpenLibraryData
+  }
+
+  class OpenLibraryData {
+    - isbn: String
+    - title: String
+    - author_name: String
+    - publish_date: int
+    - publisher: String
+  }
+}
+
+package "Model" {
+  class Book {
+    - idBook: Long
+    - isbn: String
+    - title: String
+    - author: String
+    - category: Category
+    - year: int
+    - publisher: String
+    - description: String
+    - status: BookStatus
+    - loans: List<Loan>
+    + setIsbn(isbn: String): void
+    + setTitle(title: String): void
+    + setAuthor(author: String): void
+    + setCategory(category: Category): void
+    + setYear(year: int): void
+    + setPublisher(publisher: String): void
+    + setLoans(loans: List<Loan>): void
+    + toString(): String
+  }
+
+  class Loan {
+    + LIMIT_BORROWS: int
+    - idLoan: Long
+    - loanDate: LocalDate
+    - returnLimitDate: LocalDate
+    - returnDate: LocalDate
+    - status: LoanStatus
+    - fine: Double
+    - user: UserModel
+    - book: Book
+    + toString(): String
+  }
+
+  class LoanStatus {
+    + ATRASADO: LoanStatus
+    + DEVOLVIDO_COM_MULTA: LoanStatus
+    + DEVOLVIDO_SEM_MULTA: LoanStatus
+    + REGULAR: LoanStatus
+  }
+
+  class Role {
+    - idRole: Long
+    - roleName: String
+    - users: List<UserModel>
+    + toString(): String
+  }
+
+  class UserModel {
+    - idUser: Long
+    - username: String
+    - password: String
+    - email: String
+    - name: String
+    - role: Role
+    + toString(): String
+  }
+
+  enum BookStatus {
+    + EMPRESTADO
+    + DISPONIVEL
+  }
+
+  enum Category {
+    + ROMANCE
+    + DRAMA
+    + POESIA
+    + TEATRO
+    + CIENTIFICO
+    + FANTASIA
+    + BIBLIOGRAFIA
+    + CIENCIAS
+    + MATEMATICA
+    + COMPUTACAO
+    + INFANTIL
+    + LITERARIO
+    + DESCONHECIDA
+  }
+}
+
+package "Config" {
+  class CustomUserDetails {
+    - id: Long
+    - name: String
+    - email: String
+    - password: String
+    - username: String
+    - authorities: List<GrantedAuthority>
+    + getAuthorities(): Collection<? extends GrantedAuthority>
+    + getPassword(): String
+    + getUsername(): String
+    + isAccountNonExpired(): boolean
+    + isAccountNonLocked(): boolean
+    + isCredentialsNonExpired(): boolean
+    + isEnabled(): boolean
+  }
+
+  class CustomUserDetailsService {
+    - userRepository: IUserRepository
+    + loadUserByUsername(username: String): UserDetails
+  }
+
+  class DataInitializer {
+    - roleRepository: IRoleRepository
+    - userRepository: IUserRepository
+    + run(args: String...): void
+    - initializeRoles(): void
+    - createRoleIfNotExists(roleName: String): void
+    - initializeUsers(): void
+    - createUserIfNotExists(username: String, email: String, name: String, password: String, roleName: String): void
+    - passwordEncoder(): PasswordEncoder
+  }
+
+  class RestTemplateConfig {
+    + restTemplate(): RestTemplate
+  }
+
+  class SecurityConfig {
+    - userDetailsService: CustomUserDetailsService
+    - userRepository: IUserRepository
+    - roleRepository: IRoleRepository
+    + passwordEncoder(): PasswordEncoder
+    + configureGlobal(auth: AuthenticationManagerBuilder): void
+    + filterChain(http: HttpSecurity): SecurityFilterChain
+  }
+}
+
+package "Controller" {
+  class HomeController {
+    + home(): String
+    + login(): String
+    + dashboard(): String
+    + logout(request: HttpServletRequest, response: HttpServletResponse): String
+  }
+
+  class BookController {
+    + books(model: Model): String
+    + searchByTitle(model: Model, title: String): String
+    + addNewBook(book: Book): String
+    + saveNewBook(book: Book, errors: Errors): String
+    + editBook(book: Book, model: Model): String
+    + afterEdit(book: Book, errors: Errors): String
+    + removeBook(book: Book): String
+    + showImportPage(): String
+    + importBookByIsbn(isbn: String): String
+  }
+
+  class LoanController {
+    + loans(model: Model): String
+    + loanBook(model: Model): String
+    + processLoanForm(loan: Loan, errors: Errors): String
+    + myLoans(userId: Long, model: Model): String
+    + showReturnConfirmation(idLoan: Long, model: Model): String
+    + returnLoan(idLoan: Long): String
+    + overdueList(model: Model): String
+    + returns(model: Model): String
+    + overDueReturns(model: Model): String
+    + onTimeReturns(model: Model): String
+  }
+
+  class UserController {
+    + getAllUsers(model: Model): String
+    + addUser(model: Model): String
+    + saveUser(user: UserModel, errors: Errors): String
+    + editUser(user: UserModel, model: Model): String
+    + afterEdit(user: UserModel, errors: Errors): String
+    + removeUser(user: UserModel): String
+    + searchByTitle(model: Model, name: String): String
+  }
+}
+
+package "Repository" {
+  interface IBookRepository {
+    + findByIsbn(isbn: String): Book
+  }
+
+  interface ILoanRepository {
+    + findByUserAndStatus(user: UserModel, status: LoanStatus): List<Loan>
+  }
+
+  interface IRoleRepository {
+    + findByRoleName(roleName: String): Role
+  }
+
+  interface IUserRepository {
+    + findByUsername(username: String): UserModel
+  }
+}
+
+package "Service" {
+  interface BookService {
+    + listBooks(): List<Book>
+    + addBook(book: Book): Book
+    + importBook(isbn: String): Book
+    + deleteBook(book: Book): void
+    + updateBook(book: Book): void
+    + searchBook(idBook: Long): Book
+    + searchBookByTitle(title: String): List<Book>
+  }
+
+  interface LoanService {
+    + listLoans(): List<Loan>
+    + qtdLoansByUser(idUser: Long): int
+    + loansByUser(idUser: Long): List<Loan>
+    + activeLoansByUser(idUser: Long): List<Loan>
+    + activeLoans(): List<Loan>
+    + setLoanStatus(): void
+    + overdueLoans(): List<Loan>
+    + returnedLoans(): List<Loan>
+    + overdueReturned(): List<Loan>
+    + onTimeReturned(): List<Loan>
+    + searchLoan(loan: Loan): Loan
+    + searchLoanById(idLoan: Long): Optional<Loan>
+    + addLoan(loan: Loan): void
+    + returnBook(loanOptional: Optional<Loan>): void
+    + calculeFine(loan: Loan): void
+    + calculeFineForAllLoans(): void
+    + updateLoanStatusForAllLoans(): void
+    + scheduleCalculeFine(): void
+    + scheduleUpdateLoanStatus(): void
+  }
+
+  interface OpenLibraryService {
+    + getBookByIsbn(isbn: String): OpenLibraryData
+  }
+
+  interface RoleService {
+    + findRoleById(id: Long): Role
+  }
+
+  interface UserService {
+    + listUsers(): List<UserModel>
+    + addUser(user: UserModel): UserModel
+    + updateUser(user: UserModel): void
+    + deleteUser(user: UserModel): void
+    + searchUser(username: String): UserModel
+    + searchUserById(idUser: Long): UserModel
+    + searchUsers(name: String): List<UserModel>
+  }
+
+  class OpenLibraryServiceImpl {
+    - restTemplate: RestTemplate
+    + getBookByIsbn(isbn: String): OpenLibraryData
+   }
+
+   class RoleServiceImpl {
+    - roleRepository: IRoleRepository
+    + findRoleById(id: Long): Role
+  }
+
+  class BookServiceImpl {
+    + listBooks(): List<Book>
+    + addBook(book: Book): Book
+    + importBook(isbn: String): Book
+    + deleteBook(book: Book): void
+    + updateBook(book: Book): void
+    + searchBook(idBook: Long): Book
+    + searchBookByTitle(title: String): List<Book>
+  }
+
+   class UserServiceImpl {
+    - userRepository: IUserRepository
+    + listUsers(): List<UserModel>
+    + addUser(user: UserModel): UserModel
+    + updateUser(user: UserModel): void
+    + deleteUser(user: UserModel): void
+    + searchUser(username: String): UserModel
+    + searchUsers(name: String): List<UserModel>
+    + searchUserById(idUser: Long): UserModel
+    }
+
+  class LoanServiceImpl {
+    + listLoans(): List<Loan>
+    + qtdLoansByUser(idUser: Long): int
+    + loansByUser(idUser: Long): List<Loan>
+    + activeLoansByUser(idUser: Long): List<Loan>
+    + activeLoans(): List<Loan>
+    + setLoanStatus(): void
+    + overdueLoans(): List<Loan>
+    + returnedLoans(): List<Loan>
+    + overdueReturned(): List<Loan>
+    + onTimeReturned(): List<Loan>
+    + searchLoan(loan: Loan): Loan
+    + searchLoanById(idLoan: Long): Optional<Loan>
+    + addLoan(loan: Loan): void
+    + returnBook(loanOptional: Optional<Loan>): void
+    + calculeFine(loan: Loan): void
+    + calculeFineForAllLoans(): void
+    + updateLoanStatusForAllLoans(): void
+    + scheduleCalculeFine(): void
+    + scheduleUpdateLoanStatus(): void
+  }
+}
+
+package "Bibliotecaob"{
+    class BibliotecaobApplication {
+        + main(args: String...): void
+}
+}
+
+OpenLibraryAdapter -- OpenLibraryData: uses
+Book -- Category: has
+Book -- Loan: has
+Book -- UserModel: has
+Loan -- LoanStatus: has
+Role -- UserModel: has
+CustomUserDetails -- GrantedAuthority: has
+CustomUserDetailsService -- IUserRepository: uses
+DataInitializer -- IRoleRepository: uses
+DataInitializer -- IUserRepository: uses
+RestTemplateConfig -- RestTemplate: creates
+SecurityConfig -- CustomUserDetailsService: uses
+SecurityConfig -- IUserRepository: uses
+SecurityConfig -- IRoleRepository: uses
+HomeController -- HttpServletRequest: uses
+HomeController -- HttpServletResponse: uses
+BookController -- Model: uses
+BookController -- Errors: uses
+LoanController -- Model: uses
+LoanController -- Loan: uses
+LoanController -- HttpServletRequest: uses
+LoanController -- HttpServletResponse: uses
+UserController -- Model: uses
+UserController -- UserModel: uses
+UserController -- Errors: uses
+IBookRepository -- Book: returns
+ILoanRepository -- UserModel: returns
+ILoanRepository -- LoanStatus: returns
+IRoleRepository -- Role: returns
+IUserRepository -- UserModel: returns
+BookService -- Book: returns
+BookService -- Book: creates
+LoanService -- Loan: returns
+LoanService -- Loan: creates
+LoanService -- Loan: updates
+LoanService -- LoanStatus: returns
+OpenLibraryService -- OpenLibraryData: returns
+RoleService -- Role: returns
+UserService -- UserModel: returns
+UserService -- UserModel: creates
+UserService -- UserModel: updates
+@enduml

@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2/family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: url('../assets/background.png') no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.home {
+    width: 1000px;
+    height: 500px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Centraliza no eixo transversal (vertical) */
+}
+
+.home .logo {
+    text-align: center;
+}
+
+.home h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 60px; /* Ajusta o espaçamento abaixo do h1 */
+}
+
+.home .btn {
+    width: 100%;
+    height: 200px; /* Ajusta a altura do botão conforme necessário */
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    font-size: 24px;
+    color: #333;
+    font-weight: 600;
+}
+
+.wrapper {
+	width: 420px;
+	background: transparent;
+	border: 2px solid rgba(255,255,255,.2);
+	backdrop-filter: blur(20px);
+	box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+	color: #fff;
+	border-radius: 10px;
+	padding: 30px 40px;
+}
+
+.wrapper .logo{
+    text-align: center;
+}
+
+.logo img {
+  margin-bottom: 20px; 
+}
+
+
+.wrapper h1{
+	font-size: 36px;
+	text-align: center;
+}
+
+.wrapper .input-box{
+	position: relative;
+	width: 100%;
+	height: 50px;
+	margin: 30px 0;
+}
+
+.input-box input{
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	border: none;
+	outline: none;
+	border: 2px solid rgba(255,255,255,.2);
+	border-radius: 40px;
+	font-size: 16px;
+	color: #fff;
+	padding: 20px 45px 20px 20px;
+
+}
+
+.input-box input::placeholder{
+	color: #fff;
+
+}
+
+.input-box i {
+	position: absolute;
+	right: 20px;
+	top:50%;
+	transform: translateY(-50%);
+	font-size: 20px;
+}
+
+
+.wrapper .btn{
+	width: 100%;
+	height: 45px;
+	background: #fff;
+	border: none;
+	cursor: pointer;
+	outline: none;
+	border-radius: 40px;
+	box-shadow: 0 0 10px rgba(0,0,0,.1);
+	font-size: 16px;
+	color:#333;
+	font-weight: 600;
+}
+
+.my-navbar{
+	background-color: rgba(255, 255, 255, 0.8);
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	text-align: center;
+}
+
+.my-navbar img{
+	display:flex;
+	align-items: center;
+	max-width: 50px;
+	max-height: 50px;
+	margin-right: 10px;
+
+}
+.my-navbar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: rgba(255, 255, 255, 0.8);
+}
+  
+.my-navbar li {
+	float: left;
+}
+  
+.my-navbar li a {
+	display: block;
+	color: #333;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+  
+.my-navbar li a:hover {
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+.books {
+    width: 90%;
+    height: 800px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza no eixo transversal (vertical) */
+}
+
+.books h1 {
+    font-size: 36px;
+    text-align: center;
+	margin-top: 2px;
+    margin-bottom: 50px; 
+}
+
+.books .btn {
+    width: 250px;
+    height: 250px; /* Ajusta a altura do botão conforme necessário */
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+	margin-bottom: 50px; 
+}
+.my-footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.8);
+	text-align: center;
+	padding: 20px 0;
+}
+.my-footer a {
+	text-decoration: none;
+	color: #333;
+	margin: 0 10px;
+	font-size: 24px;
+}
+
+.user-info-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: auto;	
+}
+
+.user-info-box {
+	background-color: #f0f0f0;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(150, 149, 149, 0.1);
+	text-align: center;
+	width: 200px;
+	height: auto;
+	color: #333;
+	margin-bottom: 20px;
+	margin-left: 20px;
+}

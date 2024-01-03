@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Devolução</title>	
+    <link rel="icon" th:href="@{/assets/logo.png}" type="image/png" >	
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="my-navbar">
+        <div sec:authorize="hasRole('ROLE_USER')">
+             <ul>
+                <li><a href="/books">Livros</a></li>
+                <li><a href="/myLoans">Meus Empréstimos</a></li>
+                <li><a href="/logout" th:href="@{/logout}">Sair</a></li>
+            </ul>
+                
+        </div>
+                
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <ul>
+                <li><a href="/books">Livros</a></li>
+                <li><a href="/loans">Empréstimos</a></li>
+                <li><a href="/returns">Devoluções</a></li>
+                <li><a href="/users">Usuários</a></li>
+                <li><a href="/logout" th:href="@{/logout}">Sair</a></li>
+            </ul>
+        </div>
+    </div>
+        
+    <div class="jumbotron mx-5 mt-5">
+
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="float-left">
+					<h1>Confirmação de Devolução</h1>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="float-right">
+					<a class="btn btn-outline-info" th:href="@{/loans}">Voltar</a>
+				</div>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="card bg-light text-center">
+			<div class="card-header">Informações</div>
+			<div class="card-body">
+				<h5 class="card-title">Devolução:</h5>
+				<p class="card-text" th:if="${loan != null}">
+                    <strong>Livro:</strong> <em th:text="${loan.book.title}"></em>
+                    <br> <strong>ID do Livro:</strong> <em th:text="${loan.book.idBook}"></em>
+                    <br> <strong>Usuario:</strong> <em th:text="${loan.user.name}"></em>
+                    <br> <strong>Multa:</strong> <em th:text="${loan.fine}"></em>
+                </p>
+                <form th:if="${loan != null}" th:action="@{/loans/return/{idLoan}(idLoan=${loan.idLoan})}" method="post">
+                    <button type="submit">Confirmar Devolução</button>
+                </form>
+			</div>
+		</div>
+
+
+
+	</div>
+
+
+    <div class="my-footer">
+        <a href="https://www.linkedin.com/in/mariana-duarte-moreira/" target="_blank"><i class='bx bxl-linkedin'></i></a>
+        <a href="https://marimoreiraa.github.io/" target="_blank"><i class='bx bx-globe'></i></a>
+        <a href="https://github.com/marimoreiraa" target="_blank"><i class='bx bxl-github'></i></a>
+    </div>
+</body>
+</html>

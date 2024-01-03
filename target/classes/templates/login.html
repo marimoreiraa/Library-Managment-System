@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca OB</title>
+    <link rel="icon" th:href="@{/assets/logo.png}" type="image/png">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="wrapper"> 
+
+
+    <div class="user-info-container">
+        <div class="user-info-box">
+            <h2>Admin</h2>
+            <p>Username: admin</p>
+            <p>Password: senha</p>
+        </div>
+        <div class="user-info-box">
+            <h2>Usuário</h2>
+            <p>Username: user</p>
+            <p>Password: senha</p>
+        </div>
+    </div>
+        
+        <form th:action="@{/login}" method="POST" id="login">
+            <!-- Adiciona o token CSRF -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        
+            <div class="logo">
+                <img th:src="@{/assets/logo.png}" alt="Logo" style="max-width: 100px; max-height: 100px;">
+            </div>
+            <h1>Entrar no Sistema da Biblioteca OB</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Username" name="username" id="username" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Password" name="password" id="password" required>
+                <i class='bx bxs-lock'></i>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+    </div>
+
+    <div class="my-footer">
+        <a href="https://www.linkedin.com/seu-perfil-linkedin" target="_blank"><i class='bx bxl-linkedin'></i></a>
+        <a href="https://www.seusite.com" target="_blank"><i class='bx bx-globe'></i></a>
+        <a href="https://github.com/seu-usuario-github" target="_blank"><i class='bx bxl-github'></i></a>
+    </div>
+</body>
+</html>
