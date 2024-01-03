@@ -2,7 +2,7 @@ package br.com.marianadmoreira.bibliotecaob.service;
 
 import java.util.List;
 
-import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.json.JSONException;
 
 import br.com.marianadmoreira.bibliotecaob.model.Book;
 
