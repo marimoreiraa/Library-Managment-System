@@ -22,7 +22,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgres://dpg-cmaqbta1hbls73cnbdg0-a.oregon-postgres.render.com/bibliotecaob
+      SPRING_DATASOURCE_URL: jdbc:postgresql://dpg-cmaqbta1hbls73cnbdg0-a.oregon-postgres.render.com/bibliotecaob
       SPRING_DATASOURCE_USERNAME: bibliotecaob
       SPRING_DATASOURCE_PASSWORD: iYQAPXtBJO6l932oXdKwqcxizHk5UjT8
     networks:
