@@ -22,7 +22,8 @@ public class BookServiceImpl implements BookService{
 
     private final OpenLibraryService openLibraryService;
 
-    public BookServiceImpl(OpenLibraryService openLibraryService) {
+    @Autowired
+    public BookServiceImpl(@Autowired(required = false) OpenLibraryService openLibraryService) {
         this.openLibraryService = openLibraryService;
     }
 
