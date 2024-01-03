@@ -5,9 +5,9 @@ services:
     image: postgres:latest
     container_name: postgres-bibliotecaob
     environment:
-      POSTGRES_DB: railway
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: D-B*EcGA4*bA6*gA4ED*DC*c-2cDecfg 
+      POSTGRES_DB: bibliotecaob
+      POSTGRES_USER: bibliotecaob
+      POSTGRES_PASSWORD: iYQAPXtBJO6l932oXdKwqcxizHk5UjT8
     ports:
       - "5432:5432"
     networks:
@@ -22,9 +22,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres.railway.internal:5432/railway
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: D-B*EcGA4*bA6*gA4ED*DC*c-2cDecfg 
+      SPRING_DATASOURCE_URL: jdbc:postgres://dpg-cmaqbta1hbls73cnbdg0-a.oregon-postgres.render.com/bibliotecaob
+      SPRING_DATASOURCE_USERNAME: bibliotecaob
+      SPRING_DATASOURCE_PASSWORD: iYQAPXtBJO6l932oXdKwqcxizHk5UjT8
     networks:
       - mynetwork
 
