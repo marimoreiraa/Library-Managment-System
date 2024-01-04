@@ -66,8 +66,14 @@ public class BookController {
             return "error/bookExists";
         }
         else{
-            this.bookService.addBook(book);
-            return "redirect:/books";
+            if(book.getDescription().length() > 1000){
+                return "error/largeDescription";
+            }
+            else{
+                this.bookService.addBook(book);
+                return "redirect:/books"; 
+            }
+            
             
         }
         

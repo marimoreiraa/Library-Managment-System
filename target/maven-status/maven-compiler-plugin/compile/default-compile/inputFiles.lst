@@ -9,7 +9,6 @@
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/repository/ILoanRepository.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/controller/HomeController.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/model/LoanStatus.java
-/home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/repository/IBorrowRepository.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/model/Book.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/controller/BookController.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/config/CustomUserDetailsService.java
@@ -18,18 +17,14 @@
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/model/Loan.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/BibliotecaobApplication.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/repository/IUserRepository.java
-/home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/model/BorrowStatus.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/api/OpenLibraryData.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/adapter/OpenLibraryAdapater.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/repository/IRoleRepository.java
-/home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/service/BorrowService.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/service/RoleService.java
-/home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/model/Borrow.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/controller/UserController.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/service/LoanServiceImpl.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/model/Role.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/service/OpenLibraryService.java
-/home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/service/BorrowServiceImpl.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/api/OpenLibraryApiResponse.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/model/Category.java
 /home/mariana/Documents/Pessoal/github/bibliotecaob/src/main/java/br/com/marianadmoreira/bibliotecaob/config/DataInitializer.java

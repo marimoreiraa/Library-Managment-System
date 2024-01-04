@@ -65,14 +65,20 @@ public class LoanController {
 
         UserModel user = userService.searchUserById(loan.getUser().getIdUser());
         int qtdUserLoans = loanService.qtdLoansByUser(user.getIdUser());
-        
-        if(qtdUserLoans > Loan.LIMIT_BORROWS || loan.getBook().getStatus().equals(BookStatus.EMPRESTADO)){
-            return "redirect:/error";
+        System.err.println(qtdUserLoans);
+        if(loan.getBook().getStatus().equals(BookStatus.EMPRESTADO)){
+            return "error/bookUnavailable";
+        }
+        else if(qtdUserLoans > Loan.LIMIT_BORROWS){
+            return "error/userLoansOnLimit";
+        }
+        else{
+           loan.getBook().setStatus(BookStatus.EMPRESTADO);
+            loanService.addLoan(loan);
+            return "redirect:/loans"; 
         }
 
-        loan.getBook().setStatus(BookStatus.EMPRESTADO);
-        loanService.addLoan(loan);
-        return "redirect:/loans";
+        
     }
 
     @GetMapping("/myLoans/{userId}")
@@ -148,7 +154,7 @@ public class LoanController {
         var totalOnTime = loans.size();
 
         model.addAttribute("loans", loans);
-        model.addAttribute("totalOverdue", totalOnTime);
+        model.addAttribute("totalOnTime", totalOnTime);
         return "returns/onTime";
     }
 }

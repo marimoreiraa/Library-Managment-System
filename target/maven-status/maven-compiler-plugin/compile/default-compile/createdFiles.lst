@@ -5,12 +5,9 @@ br/com/marianadmoreira/bibliotecaob/repository/ILoanRepository.class
 br/com/marianadmoreira/bibliotecaob/model/Book.class
 br/com/marianadmoreira/bibliotecaob/repository/IRoleRepository.class
 br/com/marianadmoreira/bibliotecaob/adapter/OpenLibraryAdapater.class
-br/com/marianadmoreira/bibliotecaob/model/BorrowStatus.class
-br/com/marianadmoreira/bibliotecaob/repository/IBorrowRepository.class
 br/com/marianadmoreira/bibliotecaob/service/RoleService.class
 br/com/marianadmoreira/bibliotecaob/controller/BookController.class
 br/com/marianadmoreira/bibliotecaob/api/OpenLibraryApiResponse.class
-br/com/marianadmoreira/bibliotecaob/model/Borrow.class
 br/com/marianadmoreira/bibliotecaob/repository/IUserRepository.class
 br/com/marianadmoreira/bibliotecaob/config/SecurityConfig.class
 br/com/marianadmoreira/bibliotecaob/service/LoanServiceImpl.class
@@ -24,11 +21,9 @@ br/com/marianadmoreira/bibliotecaob/BibliotecaobApplication.class
 br/com/marianadmoreira/bibliotecaob/service/BookService.class
 br/com/marianadmoreira/bibliotecaob/model/LoanStatus.class
 br/com/marianadmoreira/bibliotecaob/model/Role.class
-br/com/marianadmoreira/bibliotecaob/service/BorrowServiceImpl.class
 br/com/marianadmoreira/bibliotecaob/service/UserServiceImpl.class
 br/com/marianadmoreira/bibliotecaob/model/UserModel.class
 br/com/marianadmoreira/bibliotecaob/service/OpenLibraryService.class
-br/com/marianadmoreira/bibliotecaob/service/BorrowService.class
 br/com/marianadmoreira/bibliotecaob/controller/UserController.class
 br/com/marianadmoreira/bibliotecaob/service/OpenLibraryServiceImpl.class
 br/com/marianadmoreira/bibliotecaob/service/BookServiceImpl.class
