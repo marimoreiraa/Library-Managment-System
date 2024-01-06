@@ -8,8 +8,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpClientErrorException;
 
 import br.com.marianadmoreira.bibliotecaob.model.Book;
+import br.com.marianadmoreira.bibliotecaob.model.BookStatus;
 import br.com.marianadmoreira.bibliotecaob.service.BookService;
 import br.com.marianadmoreira.bibliotecaob.service.LoanService;
 import br.com.marianadmoreira.bibliotecaob.service.OpenLibraryService;
@@ -99,9 +101,15 @@ public class BookController {
     }
     @GetMapping("/books/delete/{idBook}")
     public String removeBook(Book book){
-        this.bookService.deleteBook(book);
+        if(book.getStatus().equals(BookStatus.EMPRESTADO)){
+            return "error/bookLoaned";
+        }
+        else{
+            this.bookService.deleteBook(book);
 
-        return "redirect:/books";
+            return "redirect:/books";
+        }
+        
     }
 
     @GetMapping("/books/import")
@@ -111,15 +119,26 @@ public class BookController {
 
     @PostMapping("/books/import")
     public String importBookByIsbn(@RequestParam String isbn) throws JSONException {
-         if(bookService.checkIfBookExists(isbn)){
-            return "error/bookExists";
-        }
-        else{
-            Book book = bookService.importBook(isbn);
-            bookService.addBook(book);
+        try {
+            if(bookService.checkIfBookExists(isbn)){
+                return "error/bookExists";
+            }
+            else{
+                Book book = bookService.importBook(isbn);
 
-            return "redirect:/books";
+                if(book != null){
+                    bookService.addBook(book);
+                    return "redirect:/books";
+                }
+                else{
+                    return "error/isbnNotFound";
+                }
+            }
+                
+        } catch (HttpClientErrorException.NotFound notFoundException) {
+            return "error/isbnNotFound";
         }
+
     }
 
 }
