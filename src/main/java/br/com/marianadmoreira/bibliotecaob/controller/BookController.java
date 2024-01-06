@@ -101,6 +101,7 @@ public class BookController {
     }
     @GetMapping("/books/delete/{idBook}")
     public String removeBook(Book book){
+        book = this.bookService.searchBook(book.getIdBook());
         if(book.getStatus().equals(BookStatus.EMPRESTADO)){
             return "error/bookLoaned";
         }
